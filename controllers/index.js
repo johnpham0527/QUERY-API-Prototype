@@ -194,7 +194,33 @@ async function deleteProgram(req, res) {
 }
 
 
+// post a library
+async function postLibrary(req, res) {
+  try {
+    const library = await new Library(req.body)
+    await library.save()
+
+    res.json(library)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+// post a presenter
+async function postPresenter(req, res) {
+  try {
+    const presenter = await new Presenter(req.body)
+    await presenter.save()
+
+    res.json(presenter)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+
 module.exports = {
   getLibraries, getLibraryPrograms, getLibraryProgramsId,
-  postProgram, putProgram, deleteProgram, getPresenters
+  postProgram, putProgram, deleteProgram, getPresenters,
+  postLibrary, postPresenter
 }
