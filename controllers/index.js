@@ -118,11 +118,15 @@ async function postProgram(req, res) {
     // because json cannot transmit a javascript date 
     // we will input an array [Y, M, D, H, M, S]
     newPost.startTime = new Date(...newPost.startTime)
+
+    // we will also grab the correct libraryName with the library id
+    const library = await Library.findById(newPost.library)
+    newPost.libraryName = library.name
+
     const program = await new Program(newPost)
     await program.save()
 
     // we also want to link this in the schema of the library that hosts it
-    const library = await Library.findById(program.library)
     library.programs.push(program['_id'])
     await library.save()
 
@@ -132,7 +136,46 @@ async function postProgram(req, res) {
   }
 }
 
+// post a program 
+// can spread operator all the object keys that are not nested
+async function putProgram(req, res) {
+  try {
+    const id = req.params.id
+    const newProgram = req.body
+
+    // because json cannot transmit a javascript date 
+    // we will input an array [Y, M, D, H, M, S]
+    newProgram.startTime = new Date(...newProgram.startTime)
+
+    // Currently cannot change which library 
+    // the program is linked to. Need to delete and create new program.
+    if (newProgram.library) delete newProgram.library
+    if (newProgram.libraryName) delete newProgram.libraryName
+
+    // Currently overwriting a key that holds an object removes all the children (so the attendees data)
+    // So the quickest way is to grab that object and use spread operator to fill it in 
+    const oldProgram = await Program.findById(id)
+    newProgram.attendees = {
+      ...oldProgram.attendees,
+      ...newProgram.attendees
+    }
+
+    await Program.findByIdAndUpdate(id, newProgram, { new: true }, (error, program) => {
+      if (error) {
+        return res.status(500).json({ error: error.message })
+      }
+      if (!program) {
+        return res.status(404).json({ message: "Program not found" })
+      }
+      res.status(200).json(program)
+    })
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   getLibraries, getLibraryPrograms, getLibraryProgramsId,
-  postProgram, getPresenters
+  postProgram, putProgram, getPresenters
 }

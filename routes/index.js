@@ -26,4 +26,7 @@ router.get("/libraries/id/:libraryId", (req, res) => controllers.getLibraryProgr
 // post a new program 
 router.post("/libraries/new", (req, res) => controllers.postProgram(req, res))
 
+// edit a program found by id 
+router.put("/libraries/edit/:id", (req, res) => controllers.putProgram(req, res))
+
 module.exports = router
