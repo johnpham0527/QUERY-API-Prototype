@@ -9,7 +9,15 @@ async function getLibraries(req, res) {
   try {
     const libraries = await Library.find()
 
-    res.json(libraries)
+    // we want to only return the name and id 
+    libNames = libraries.map(lib => {
+      return {
+        _id: lib['_id'],
+        name: lib.name
+      }
+    })
+
+    res.json(libNames)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }

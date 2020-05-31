@@ -8,10 +8,9 @@ router.get("/", (req, res) => {
   res.send("This is root!" + (queryTest ? ` Your query was ${queryTest}` : ''))
 })
 
-// get all events 
-router.get("/events", (req, res) => controllers.getLibraries)
+// get all libraries 
+router.get("/libraries", (req, res) => controllers.getLibraries(req, res))
 
-// get one event 
-router.get("/events/:id", (req, res) => controllers.getEvent)
+
 
 module.exports = router

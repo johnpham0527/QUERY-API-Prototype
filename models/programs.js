@@ -8,6 +8,7 @@ const Program = new Schema({
   library: { type: Schema.Types.ObjectId, required: true },
   libraryName: { type: String, required: true },
   category: { type: String, required: true },
+  presenter: { type: Schema.Types.ObjectId },
   attendees: {
     type: {
       childrenAttendees: Number,
