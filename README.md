@@ -10,7 +10,7 @@ The purpose of this project is to create and maintain a database that keeps trac
 
 This API was built with Express, Nodejs and MongoDB. 
 
-[Deployed root node:](https://query-api-prototype.herokuapp.com/api/)
+[Deployed root node on Heroku](https://query-api-prototype.herokuapp.com/api/)
 
 ## API Routes
 
