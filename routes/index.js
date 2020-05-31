@@ -11,6 +11,8 @@ router.get("/", (req, res) => {
 // get all libraries 
 router.get("/libraries", (req, res) => controllers.getLibraries(req, res))
 
-
+// get all programs based on library name 
+// can do case insensitive and spaces replaced by dashes or underscores 
+router.get("/libraries/:libraryName", (req, res) => controllers.getLibraryPrograms(req, res))
 
 module.exports = router
