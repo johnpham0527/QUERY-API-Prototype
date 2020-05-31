@@ -29,4 +29,7 @@ router.post("/libraries/new", (req, res) => controllers.postProgram(req, res))
 // edit a program found by id 
 router.put("/libraries/edit/:id", (req, res) => controllers.putProgram(req, res))
 
+// edit a program found by id 
+router.put("/libraries/delete/:id", (req, res) => controllers.deleteProgram(req, res))
+
 module.exports = router

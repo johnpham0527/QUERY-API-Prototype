@@ -175,7 +175,26 @@ async function putProgram(req, res) {
   }
 }
 
+
+// delete a program 
+async function deleteProgram(req, res) {
+  try {
+    const id = req.params.id
+
+    const deleted = await Program.findByIdAndDelete(id)
+
+    if (deleted) {
+      return res.status(200).json(`Program deleted: ${id}`)
+    }
+    throw new Error('Program not found')
+
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+
 module.exports = {
   getLibraries, getLibraryPrograms, getLibraryProgramsId,
-  postProgram, putProgram, getPresenters
+  postProgram, putProgram, deleteProgram, getPresenters
 }
