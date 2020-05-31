@@ -36,6 +36,6 @@ router.put("/libraries/delete/:id", (req, res) => controllers.deleteProgram(req,
 router.post("/libraries/newLibrary", (req, res) => controllers.postLibrary(req, res))
 
 // post a new program 
-router.post("/libraries/newPresenter", (req, res) => controllers.postPresenter(req, res))
+router.post("/presenters/newPresenter", (req, res) => controllers.postPresenter(req, res))
 
 module.exports = router
