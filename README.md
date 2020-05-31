@@ -18,7 +18,7 @@ All routes return JSON data or error codes as strings
 
 #### Libraries 
 
-  * GET /api/libraries - get all libraries (name and id) as an array 
+  * GET /api/libraries - get all libraries (only name and id) as an array 
   
   * POST /api/libraries/newLibrary - create a new library database item. will eventually be access restricted 
   
@@ -60,6 +60,9 @@ const Library = new Schema({
 })
 ```
 
+##### Library Notes
+  * When the GET libraries request is made, only the name and id are returned
+
 #### Presenter
 ```js
 const Presenter = new Schema({
@@ -70,6 +73,8 @@ const Presenter = new Schema({
   timestamps: true
 })
 ```
+##### Presenter Notes
+  * Currently, only linked to from Program schema
 
 #### Program
 ```js
@@ -93,4 +98,7 @@ const Program = new Schema({
   timestamps: true
 })
 ```
-
+##### Program Notes
+  * POST requests: a valid library id is needed. The server finds the library's name and fills it in so the library's name does not have to be spelled perfectly in the post request
+  * POST requests: also automatically adds this program to the correct library's array of programs
+  * PUT requests: current iteration does not allow library to be changed (will remove any changed library id's or names). This is also because the system is not built to automatically remove this program from a given library and then update the next library. However, a program can be deleted and the corresponding library must have its programs array manually updated.
