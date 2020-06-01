@@ -34,7 +34,11 @@ All routes return JSON data or error codes as strings
 
   * GET /libraries/name/:libraryName - get all the programs hosted by that library, as an array. the name finder is case insensitive, but in the url spaces should be replaced with dashes '-' or underscores '_'
   
+    * Can set limit in url "/libraries/name/:libraryName?limit=5"
+  
   * GET /libraries/id/:libraryId - get all the program hosted by that library, as an array 
+  
+    * Can set limit in url "/libraries/id/:libraryId?limit=5"
   
   * POST /libraries/new - make a new program in the database (the id needs to point to an existing library in the db but it will fill in the correct library name)
   
