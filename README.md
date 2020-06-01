@@ -32,7 +32,7 @@ All routes return JSON data or error codes as strings
   
 #### Programs 
 
-  * GET /libraries/name/:libraryName - get all the programs hosted by that library, as an array 
+  * GET /libraries/name/:libraryName - get all the programs hosted by that library, as an array. the name finder is case insensitive, but in the url spaces should be replaced with dashes '-' or underscores '_'
   
   * GET /libraries/id/:libraryId - get all the program hosted by that library, as an array 
   
