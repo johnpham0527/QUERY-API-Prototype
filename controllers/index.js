@@ -52,7 +52,7 @@ async function getLibraryPrograms(req, res) {
 
     // we would do this with .populate() but I wasn't able to populate 
     // object ids in an array so we will have to do it the hard way 
-    const programs = []
+    let programs = []
     for (let i = 0; i < libraries.programs.length; i++) {
       const prog = await Program.find({ "_id": libraries.programs[i] })
       programs.push(prog)
@@ -87,7 +87,7 @@ async function getLibraryProgramsId(req, res) {
 
     // we would do this with .populate() but I wasn't able to populate 
     // object ids in an array so we will have to do it the hard way 
-    const programs = []
+    let programs = []
     for (let i = 0; i < libraries.programs.length; i++) {
       const prog = await Program.find({ "_id": libraries.programs[i] })
       programs.push(prog)
@@ -97,6 +97,7 @@ async function getLibraryProgramsId(req, res) {
     const limit = req.query.limit
 
     try {
+      console.log('limit', limit)
       if (limit) {
         programs = programs.slice(0, parseInt(limit))
       }
